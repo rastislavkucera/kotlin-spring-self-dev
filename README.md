@@ -11,6 +11,7 @@ Aim:
 - [ ] Use oauth2
 - [x] Use postgres with JPA
 - [ ] Use File watcher for auto project reload
+- [ ] Spring migration management (Flyway / Liquibase)
 - [ ] :small_red_triangle_down: Use pre-commit hook for code formatting
 - [ ] :small_red_triangle_down: Deploy React app with this for FE - [See this](https://spring.io/guides/tutorials/react-and-spring-data-rest/#_defining_an_html_template)
 
@@ -22,6 +23,7 @@ Aim:
   - [ ] User interaction scopes
     - [ ] Read only (cannot place orders)
     - [ ] Full (can place orders)
+- [ ] Change DB to auto-update
 - [ ] User balance (Auth)
   - [ ] USD - BTC
 - [ ] Publicly accessible Order book
