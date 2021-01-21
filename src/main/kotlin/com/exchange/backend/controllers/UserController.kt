@@ -7,6 +7,7 @@ import com.exchange.backend.model.User
 import com.exchange.backend.model.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.web.bind.annotation.*
 
 class PostRegisterUserInput (var email: String, var password: String)
@@ -19,6 +20,7 @@ class UserController {
 
     @Autowired
     lateinit var userRepository: UserRepository
+    var bCryptPasswordEncoder = BCryptPasswordEncoder();
 
     @GetMapping("/{id}")
     fun user(@PathVariable id: Long): GetUserResponse {
@@ -32,12 +34,11 @@ class UserController {
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     fun registerUser(@RequestBody req: PostRegisterUserInput): Id {
-        var alreadyExists = userRepository.findByEmail(req.email)
-        if(alreadyExists != null) {
-
+        var existingUser = userRepository.findByEmail(req.email)
+        if(existingUser != null) {
             throw ConflictException(ErrorResponseBody("User with this email address already exists!"))
         }
-        var user = userRepository.save(User(id=0,email=req.email, password=req.password))
-        return Id(user.id)
+        var newUser = userRepository.save(User(0,req.email, bCryptPasswordEncoder.encode(req.password)))
+        return Id(newUser.id)
     }
 }
