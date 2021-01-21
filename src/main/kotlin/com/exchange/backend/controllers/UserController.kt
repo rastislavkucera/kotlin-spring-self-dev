@@ -24,7 +24,7 @@ class UserController {
     fun user(@PathVariable id: Long): GetUserResponse {
         var user = userRepository.findUserById(id)
         if(user == null) {
-            throw NotFoundException(ErrorResponseBody("User not found"))
+            throw NotFoundException(ErrorResponseBody("User not found!"))
         }
         return GetUserResponse(user.email, user.id)
     }
@@ -38,6 +38,6 @@ class UserController {
             throw ConflictException(ErrorResponseBody("User with this email address already exists!"))
         }
         var user = userRepository.save(User(id=0,email=req.email, password=req.password))
-        return Id(0)
+        return Id(user.id)
     }
 }
