@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.cli.common.arguments.preprocessCommandLineArguments
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -27,6 +28,7 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	// Custom
 	implementation("org.springdoc:springdoc-openapi-ui:1.5.2")
+	developmentOnly("org.springframework.boot:spring-boot-devtools")
 }
 
 tasks.withType<KotlinCompile> {

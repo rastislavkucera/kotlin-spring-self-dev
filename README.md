@@ -11,7 +11,7 @@ Aim:
 - [x] Use swagger
 - [ ] Use oauth2
 - [x] Use postgres with JPA
-- [ ] Use File watcher for auto project reload
+- [x] Use File watcher for auto project reload
 - [ ] Spring migration management (Flyway / Liquibase)
 - [ ] :small_red_triangle_down: Use pre-commit hook for code formatting (possibly gradle task ?)
 - [ ] :small_red_triangle_down: Deploy React app with this for FE - [See this](https://spring.io/guides/tutorials/react-and-spring-data-rest/#_defining_an_html_template)
@@ -59,6 +59,14 @@ In root, run:
 `./gradlew bootRun`
 
 Project will run on `localhost:8080`
+
+You can instead run:
+`./gradlew classes -t & ./gradlew bootRun`
+, in which case the server will restart automatically when files change, thanks to `spring-boot-devtools`.
+
+*Note: `spring-boot-devtools` restarts server only when `.class` files change. Because this project uses Kotlin, the change in `.class` files occurs only when the project is rebuild. Thus, we need `./gradlew classes -t` to watch and rebuild project when we modify Kotlin files.*
+
+*Note: There is no Gradle command for `./gradlew classes -t & ./gradlew bootRun`, as it does not seem like Gradle can execute this properly*
 
 ### Swagger
 You can access Swagger on `localhost:8080/swagger`
